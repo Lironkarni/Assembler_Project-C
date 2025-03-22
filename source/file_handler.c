@@ -114,7 +114,7 @@ void make_ext_file(const char *filename, ext_list *ext_table_head) {
 
 }
 
-void make_ent_file(const char *filename, Symbol *symbol_table_head) {
+void make_ent_file(const char *filename) {
     char ent_filename[256];
     size_t len = strlen(filename);
 
