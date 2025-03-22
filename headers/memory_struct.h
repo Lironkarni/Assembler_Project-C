@@ -37,7 +37,6 @@ typedef struct {
  *   first_operand: first operand (if exists)
  *   second_operand: second operand (if exists)
  *   place: memory location of the code word
- *   has_label: flag indicating associated label presence
  */
 typedef struct {
     uint8_t A_R_E : 3;      
@@ -50,7 +49,6 @@ typedef struct {
     char *first_operand;     
     char *second_operand;     
     int place;              
-    int has_label;           
 } code_word;
 
 /*
