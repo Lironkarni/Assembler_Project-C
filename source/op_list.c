@@ -106,7 +106,7 @@ int which_addressing_method(char *ptr, int op_index, Line *line)
 			return -1;
 
 		// this is used only for this operations: jmp, bne, jsr
-		if (op_index != 9 && op_index != 10 && op_index != 11)
+		if (op_index != JMP && op_index != BNE && op_index != JSR)
 		{
 			print_syntax_error(ERROR_CODE_32, line->file_name, line->line_number);
 			FOUND_ERROR_IN_FIRST_PASS = 1;

@@ -60,16 +60,16 @@ char *load_file(char *filename)
 
 void make_ext_file(const char *filename, ext_list *ext_table_head) {
     ext_list *current;
-    char ext_filename[256];
+    char ext_filename[INIT_FILE_NAME];
     size_t len = strlen(filename);
 
     /* Build .ext filename based on input */
-    if (len > 3 && strcmp(filename + len - 3, ".am") == 0) {
-        strncpy(ext_filename, filename, len - 3); 
-        ext_filename[len - 3] = '\0'; 
+    if (len > 3 && strcmp(filename + len - FILE_EXTENSION_LEN, ".am") == 0) {
+        strncpy(ext_filename, filename, len - FILE_EXTENSION_LEN); 
+        ext_filename[len - FILE_EXTENSION_LEN] = NULL_CHAR; 
     } else {
         strncpy(ext_filename, filename, sizeof(ext_filename) - 1);
-        ext_filename[sizeof(ext_filename) - 1] = '\0';
+        ext_filename[sizeof(ext_filename) - 1] = NULL_CHAR;
     }
     strcat(ext_filename, ".ext"); 
 
@@ -115,16 +115,16 @@ void make_ext_file(const char *filename, ext_list *ext_table_head) {
 }
 
 void make_ent_file(const char *filename) {
-    char ent_filename[256];
+    char ent_filename[INIT_FILE_NAME];
     size_t len = strlen(filename);
 
     /* Build .ent filename */
-    if (len > 3 && strcmp(filename + len - 3, ".am") == 0) {
-        strncpy(ent_filename, filename, len - 3); 
-        ent_filename[len - 3] = '\0'; 
+    if (len > 3 && strcmp(filename + len - FILE_EXTENSION_LEN, ".am") == 0) {
+        strncpy(ent_filename, filename, len - FILE_EXTENSION_LEN); 
+        ent_filename[len - FILE_EXTENSION_LEN] = NULL_CHAR; 
     } else {
         strncpy(ent_filename, filename, sizeof(ent_filename) - 1);
-        ent_filename[sizeof(ent_filename) - 1] = '\0';
+        ent_filename[sizeof(ent_filename) - 1] = NULL_CHAR;
     }
 
     strcat(ent_filename, ".ent"); 
@@ -139,7 +139,7 @@ void make_ent_file(const char *filename) {
     int count = 0;
     Symbol *current = symbol_table_head;
     while (current) {
-        if (current->type == 2) { // ENTRY type
+        if (current->type == TWO) { // ENTRY type
             count++;
         }
         current = current->next;
@@ -164,7 +164,7 @@ void make_ent_file(const char *filename) {
     current = symbol_table_head;
     int i = 0;
     while (current) {
-        if (current->type == 2) {
+        if (current->type == TWO) {
             symbols[i++] = current;
         }
         current = current->next;
@@ -181,16 +181,16 @@ void make_ent_file(const char *filename) {
 }
 
 void make_ob_file(const char *filename, code_word *code_image, int ic, data_word *data_image, int dc) {
-    char ob_filename[256];
+    char ob_filename[INIT_FILE_NAME];
     size_t len = strlen(filename);
 
     /* Build .ob filename */
-    if (len > 3 && strcmp(filename + len - 3, ".am") == 0) {
-        strncpy(ob_filename, filename, len - 3);
-        ob_filename[len - 3] = '\0';
+    if (len > 3 && strcmp(filename + len - FILE_EXTENSION_LEN, ".am") == 0) {
+        strncpy(ob_filename, filename, len - FILE_EXTENSION_LEN);
+        ob_filename[len - 3] = NULL_CHAR;
     } else {
         strncpy(ob_filename, filename, sizeof(ob_filename) - 1);
-        ob_filename[sizeof(ob_filename) - 1] = '\0';
+        ob_filename[sizeof(ob_filename) - 1] = NULL_CHAR;
     }
 
     strcat(ob_filename, ".ob");
@@ -207,7 +207,7 @@ void make_ob_file(const char *filename, code_word *code_image, int ic, data_word
     /* Write code segment */
     for (int i = INIT_MEMORY; i < ic; i++) {
         uint32_t full_word = 0;
-        memcpy(&full_word, &code_image[i], 3); // Copy 3 bytes (24 bits)
+        memcpy(&full_word, &code_image[i], FILE_EXTENSION_LEN); // Copy 3 bytes (24 bits)
 
         fprintf(file, "%07d  %06X\n", i, full_word);
     }

@@ -187,7 +187,7 @@ void add_data(data_word *data_image, int *numbers, Line *line)
     int numbers_size = 0;
 
     /* Calculate the number of integers in the numbers array */
-    while (numbers[numbers_size] != '\0')
+    while (numbers[numbers_size] != NULL_CHAR)
     {
         numbers_size++;
     }

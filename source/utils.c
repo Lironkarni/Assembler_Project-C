@@ -144,12 +144,12 @@ char *get_word(char *line)
     return word;
 }
 
-char *copy_name(const char *name)
-{
-    if (!name)
-        return NULL;
-    char *dup = (char *)malloc(strlen(name) + 1); // allocate memory
-    if (dup)
-        strcpy(dup, name); // העתקת המחרוזת
-    return dup;
-}
+    char *copy_name(const char *name)
+    {
+        if (!name)
+            return NULL;
+        char *dup = (char *)malloc(strlen(name) + 1); /*allocate memory in the size of the given string*/
+        if (dup)
+            strcpy(dup, name); /*copy the string*/
+        return dup;
+    }

@@ -12,22 +12,22 @@ void pre_assembler(const char *filename)
     size_t len = strlen(filename);
 
     // Check if the file has a .as extension
-    if (len < 3 || strcmp(filename + len - 3, extension) != 0)
+    if (len < FILE_EXTENSION_LEN || strcmp(filename + len - FILE_EXTENSION_LEN, extension) != 0)
     {
         printf("File %s does not have a .as extension. Skipping.\n", filename);
         return;
     }
 
     // Allocate memory for the new .am file name
-    char *new_filename = (char *)malloc(strlen(filename) + 4);
+    char *new_filename = (char *)malloc(strlen(filename) + FILE_EXTENSION_LEN+1);
     if (!new_filename) {
         print_system_error(ERROR_CODE_3); // Memory allocation failure
         return;
     }
 
     // Create the .am file name
-    strncpy(new_filename, filename, len - 3);
-    new_filename[len - 3] = NULL_CHAR;
+    strncpy(new_filename, filename, len - FILE_EXTENSION_LEN);
+    new_filename[len - FILE_EXTENSION_LEN] = NULL_CHAR;
     strcat(new_filename, ".am");
 
     FILE *input_file = fopen(filename, "r");
@@ -66,10 +66,10 @@ void pre_assembler(const char *filename)
         }
 
         // Detect start of a macro
-        if (strncmp(line, "mcro ", 5) == 0) { 
+        if (strncmp(line, "mcro ", MCRO_LEN) == 0) { 
             inside_macro = 1;
             new_line_count = 0;
-            sscanf(line + 5, "%[^\n]", macro_name);
+            sscanf(line + MCRO_LEN, "%[^\n]", macro_name);
 
             // Validate macro name
             if(is_valid_macro_name(macro_name ,filename, line_count)!= 0){
@@ -80,7 +80,7 @@ void pre_assembler(const char *filename)
         } 
 
         // Detect end of a macro
-        else if ( strncmp(line, "mcroend", 7) == 0) {
+        else if ( strncmp(line, "mcroend", MCROEND_LEN) == 0) {
             if (!inside_macro){
                print_syntax_error(ERROR_CODE_43, filename, line_count);
             } 

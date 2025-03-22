@@ -36,7 +36,7 @@ typedef struct {
  *   op_code: operation code
  *   first_operand: first operand (if exists)
  *   second_operand: second operand (if exists)
- *   place: memory location of the code word
+ *   place: memory location of the code word (is this the first operand or second operand)
  */
 typedef struct {
     uint8_t A_R_E : 3;      

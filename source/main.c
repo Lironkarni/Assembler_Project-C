@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
                 continue;
             }
 
-            char filename_am[256];
+            char filename_am[INIT_FILE_NAME];
             snprintf(filename_am, sizeof(filename_am), "test-files/%s.am", argv[i]);
             
             first_pass(filename_am);   // Start first pass (parsing, symbol table build)

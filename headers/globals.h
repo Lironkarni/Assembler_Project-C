@@ -89,4 +89,21 @@
 /* Number of bits for shifting operations (3-bit shifts) */
 #define THREE_BITS_SHIFT 3  
 
+/*length of files extension (.as / .am)*/
+#define FILE_EXTENSION_LEN 3
+
+ /*initialize size of file name*/
+#define INIT_FILE_NAME 256
+
+/*define the 3 operations index that can be addressed as relative address*/
+#define JMP 9 
+#define BNE 10 
+#define JSR 11
+
+/*defines length of "mcro "*/
+#define MCRO_LEN 5
+
+/*defines length on "mcroend"*/
+#define MCROEND_LEN 7
+
 #endif /* GLOBALS_H */

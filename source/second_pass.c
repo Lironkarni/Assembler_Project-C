@@ -70,8 +70,6 @@ void second_pass(char *file, Symbol *symbol_table_head, code_word *code_image,da
                     FOUND_ERROR_IN_SECOND_PASS=1;
                     continue;
                 }
-
-
             }
             is_label=0;
         }
@@ -161,7 +159,7 @@ void second_pass(char *file, Symbol *symbol_table_head, code_word *code_image,da
                             code_image[i] = code_u.code_w;
                         }
 
-                        else if (code_image[i].target_address == 2)  // Relative addressing
+                        else if (code_image[i].target_address == TWO)  // Relative addressing
                         {
                             int num = (current_symbol->address) - (i - 1); // caculate the between the addresses
 

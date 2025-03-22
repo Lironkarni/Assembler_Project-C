@@ -49,7 +49,7 @@ error errors[]={
     {ERROR_CODE_43, "UNEXPECTED 'mcroend' FOUND WITHOUT A VALID MACRO OPENING"}
 };
 
-
+/*initialize the if got error in a certain pass to zero*/
 int FOUND_ERROR_IN_PRE_ASSEMBLER = 0;
 int FOUND_ERROR_IN_FIRST_PASS=0;
 int FOUND_ERROR_IN_SECOND_PASS=0;

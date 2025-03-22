@@ -398,7 +398,7 @@ void test(int dc, int ic)
 {
     printf("%d\n", dc);
     printf("%d\n", ic);
-    // הדפסת טבלת הסמלים
+    /*print symbol table*/
     Symbol *current = symbol_table_head;
     printf("Symbol Table:\n");
     printf("-----------------------------\n");
@@ -409,7 +409,7 @@ void test(int dc, int ic)
     }
     printf("-----------------------------\n\n");
 
-    // הדפסת תמונת הנתונים
+    /*print data image*/
     printf("Data Image:\n");
     printf("-----------------------------\n");
     for (int i = 0; i < dc; i++)
@@ -420,14 +420,14 @@ void test(int dc, int ic)
 
     printf("Code Image\n");
     printf("%d\n", ic);
-    // הדפסת תמונת הקוד
+    /*print code image*/
     for (int i = 100; i < ic; i++)
     {
         uint32_t full_word = 0;
-        memcpy(&full_word, &code_image[i], 3); // מעתיקים רק 3 בתים (24 ביטים)
+        memcpy(&full_word, &code_image[i], 3); /*copy only 3 bytes (24 bits)*/
 
         printf("Address %d: ", i);
-        print_bits(full_word, 24); // הדפסת כל הביטים
+        print_bits(full_word, WORD_LEN); /*print all bits*/
         printf(" (0x%06X)\n", full_word);
     }
     printf("-----------------------------\n");

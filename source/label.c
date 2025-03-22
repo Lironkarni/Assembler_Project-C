@@ -12,12 +12,12 @@ int is_valid_label(char *label, Line *line)
 	check all chars are alphabetic or digits
 	check if length is lower than 32 (MAX_LABEL_LENGTH)
 	check if label name is saved assembly name
-	check if label as been defind yet
-	check if this is not a name of a macro or name of register*/
+	check if this is not a name of a macro or name of register on name of operation
+	*/
 	int i = 0, len;
 	int op;
 	len = strlen(label);
-	if(label[len-1]==COLON || label[len-1]==COMMA || label[len-1]==' '){
+	if(label[len-1]==COLON || label[len-1]==COMMA || label[len-1]==SPACE){
         label[len-1]=NULL_CHAR;
         len--;
     }
@@ -78,7 +78,7 @@ void add_symbol(Line *line, char *name, int instruction_index, int is_code)
         }
 		 /* Copy symbol name safely */
         strncpy(new_symbol->name, name,sizeof(new_symbol->name) - 1);
-		new_symbol->name[sizeof(new_symbol->name) - 1] = '\0';
+		new_symbol->name[sizeof(new_symbol->name) - 1] =NULL_CHAR;
 		/* Set symbol type and add it to symbol table */
         new_symbol->type = type;
         new_symbol->next = symbol_table_head;

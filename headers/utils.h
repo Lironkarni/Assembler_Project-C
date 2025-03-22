@@ -51,6 +51,16 @@ int extraneous_text(char *command);
  */
 char* get_word(char* line);
 
+/*
+ * Function: copy_name
+ * ----------------------------
+ *   Creates a dynamically allocated copy of the given string.
+ *
+ *   name: input string to copy
+ *
+ *   returns: pointer to the newly allocated copy,
+ *            or NULL if allocation fails or input is NULL
+ */
 char *copy_name(const char *name);
 
 #endif /* FILE_COPY_H */
