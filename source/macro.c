@@ -134,7 +134,7 @@ int is_valid_macro_name(char *macro_name, const char *filename, int line_count)
 }
 
 int is_valid_macro_end(char *line, const char *filename, int line_count) {
-    char *ptr = line + 7; // Move pointer to the character right after 'mcroend'
+    char *ptr = line + MCROEND_LEN; // Move pointer to the character right after 'mcroend'
 
     // Check if there is any extra text after 'mcroend'
     if (*ptr != NULL_CHAR && *ptr != NULL_CHAR) {

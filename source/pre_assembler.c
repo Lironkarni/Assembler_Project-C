@@ -43,7 +43,7 @@ void pre_assembler(const char *filename)
     }
 
     char line[MAX_LINE_LEN];
-    char macro_name[50];
+    char macro_name[MAX_LINE_LEN-MCRO_LEN]; /*size of mcro name can be max length of a row- size of mcro*/
     char **macro_content = NULL;
     int inside_macro = 0;
     int line_count = 0;
