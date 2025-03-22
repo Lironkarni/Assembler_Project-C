@@ -46,7 +46,7 @@ void make_ob_file(const char *filename, code_word *code_image, int ic, data_word
  *   filename: name of output file (without extension)
  *   symbol_table_head: pointer to symbol table head
  */
-void make_ent_file(const char *filename, Symbol *symbol_table_head);
+void make_ent_file(const char *filename);
 
 /*
  * Function: make_ext_file

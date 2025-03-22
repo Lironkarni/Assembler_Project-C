@@ -193,7 +193,7 @@ void second_pass(char *file, Symbol *symbol_table_head, code_word *code_image,da
 
     // Generate .ent file if there were entries
     if(has_entry){
-        make_ent_file(file,current_symbol);
+        make_ent_file(file);
     }
 
     // Generate .ext file if there were externs
