@@ -33,6 +33,11 @@ int get_data(Line *line, int inst_index, int **numbers)
     {
         if (expect_number)
         {
+            if(*data_ptr==COMMA){
+                print_syntax_error(ERROR_CODE_35, line->file_name, line->line_number);
+                free(*numbers);
+                return 1;
+            }
             char *end_ptr;
             /* Check if sign character is followed by a digit */
             if (*data_ptr == MINUS || *data_ptr == PLUS)
