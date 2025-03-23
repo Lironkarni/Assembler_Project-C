@@ -114,7 +114,7 @@ int is_valid_macro_name(char *macro_name, const char *filename, int line_count)
     // check if mcro name equals to op_word
     for (int i = 0; i < operation_count; i++)
     {
-        if (strcmp(macro_name, operation_list[i].operation_name) == 0)
+        if (strcmp (macro_name, operation_list[i].operation_name) == 0  )
         {
             print_syntax_error(ERROR_CODE_14, filename, line_count);
             valid = 1;
@@ -124,7 +124,7 @@ int is_valid_macro_name(char *macro_name, const char *filename, int line_count)
     // check if mcro name equals to directive_word
     for (int i = 0; i < directive_count; i++)
     {
-        if (strcmp(macro_name, directive_words[i]) == 0)
+        if ((strcmp(macro_name, directive_words[i]) == 0)   ||  ((macro_name[0] == '.' )&& (strcmp(macro_name+1, directive_words[i]) == 0)))
         {
             print_syntax_error(ERROR_CODE_13, filename, line_count);
             valid = 1;
