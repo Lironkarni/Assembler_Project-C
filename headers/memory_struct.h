@@ -48,7 +48,8 @@ typedef struct {
     uint8_t op_code : 6;     
     char *first_operand;     
     char *second_operand;     
-    int place;              
+    int place; 
+    int line_number;             
 } code_word;
 
 /*

@@ -76,13 +76,15 @@ void second_pass(char *file, Symbol *symbol_table_head, code_word *code_image,da
 
         // check if line has label- if yes, look if label exists in symbol table
         //  we can go over the code_image list, if line in 0, that means its a label.
+        line_number=0; 
         for (int i = INIT_MEMORY; i < IC; i++)
         {
+            line_number++;
             code_union code_u;
             code_u.code_w = code_image[i];
 
             if (code_image[i].op_code == ZERO && code_image[i].funct == ZERO && code_image[i].A_R_E == ZERO && code_image[i].source_reg == ZERO && code_image[i].target_reg == ZERO)
-            {             
+            {      
                 // it can be in the line before or 2 before
                 // the line before can be a number for ex- add #6 HELLO
                 if (code_image[i].place == 1)
@@ -92,7 +94,7 @@ void second_pass(char *file, Symbol *symbol_table_head, code_word *code_image,da
 
                     if (current_symbol == NULL)
                     {
-                        print_syntax_error(ERROR_CODE_40, line->file_name, line->line_number);
+                        print_syntax_error(ERROR_CODE_40, line->file_name, code_image[i].line_number);
                         FOUND_ERROR_IN_SECOND_PASS = 1;
                         continue;
                     }
@@ -132,7 +134,7 @@ void second_pass(char *file, Symbol *symbol_table_head, code_word *code_image,da
                     current_symbol = find_symbol(code_image[i].second_operand);
                     if (current_symbol == NULL)
                     {
-                        print_syntax_error(ERROR_CODE_40, line->file_name, line->line_number);
+                        print_syntax_error(ERROR_CODE_40, line->file_name, code_image[i].line_number);
                         FOUND_ERROR_IN_SECOND_PASS = 1;
                         continue;
                     }
@@ -142,6 +144,7 @@ void second_pass(char *file, Symbol *symbol_table_head, code_word *code_image,da
                         {
                             code_u.code_w.target_address = ZERO;
                             code_u.code_w.source_address = ZERO;
+                            code_u.code_w.line_number=ZERO;
 
                             code_u.all_bits = current_symbol->address;
                             code_u.all_bits <<= THREE_BITS_SHIFT;
@@ -165,6 +168,8 @@ void second_pass(char *file, Symbol *symbol_table_head, code_word *code_image,da
 
                             code_u.code_w.target_address = ZERO;
                             code_u.code_w.source_address = ZERO;
+                            code_u.code_w.line_number=ZERO;
+
                             code_u.all_bits = ZERO;
                             code_u.all_bits = num;
                             code_u.all_bits <<= THREE_BITS_SHIFT;
@@ -175,6 +180,8 @@ void second_pass(char *file, Symbol *symbol_table_head, code_word *code_image,da
                     }
                 }
             }
+            line_number++;
+
         }
     }
 

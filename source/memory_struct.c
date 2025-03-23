@@ -242,8 +242,7 @@ void add_to_code_image(code_word *code_image, Line *line, int num_args, int op_i
     if(IC>=MEM_SIZE)
     {
         print_system_error(ERROR_CODE_37);  // Memory overflow error
-        
-        // TODO: stop the program? stop forst pass?
+        exit(1);
     }
     code_union code_u;
 
@@ -281,6 +280,7 @@ void add_to_code_image(code_word *code_image, Line *line, int num_args, int op_i
 
     // No further operands to handle
     if (num_args == 0){
+        code_image[IC].line_number=line->line_number;
         return;
     }
         
@@ -313,6 +313,7 @@ void add_to_code_image(code_word *code_image, Line *line, int num_args, int op_i
             code_image[IC].source_address=address_method_src; //need to save the address method of src and target
             code_image[IC].target_address=address_method_des; //need to save the address method of src and target
             code_image[IC].place=1; // Mark this as first operand slot
+            code_image[IC].line_number=line->line_number;
             IC++;
             break;
         }
@@ -345,6 +346,7 @@ void add_to_code_image(code_word *code_image, Line *line, int num_args, int op_i
         code_image[IC].source_address=address_method_src; //need to save the address method of src and target
         code_image[IC].target_address=address_method_des; //need to save the address method of src and target
         code_image[IC].place=TWO; // Mark this as second operand slot
+        code_image[IC].line_number=line->line_number;
         IC++;
         break;
     }
