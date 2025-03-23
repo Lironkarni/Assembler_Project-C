@@ -36,7 +36,7 @@ void process_line(char *file)
 {
     FILE *input_file;
     char temp_line[MAX_LINE_LEN + 2], *first_word = NULL; /*for \0 and one more char for overflow check*/
-    int line_number = 0, line_len, c;
+    int line_number = 0, len;
     Line *line;
 
     input_file = fopen(file, "r");  /* Open the input file for reading */
@@ -50,22 +50,9 @@ void process_line(char *file)
         {
             printf("%s", temp_line); /* Print the current line (for debugging) */
             line_number++;
-            line_len = strlen(temp_line);       /* Calculate line length */
-            /* Replace newline character with NULL_CHAR */
-            if (temp_line[line_len - 1] == '\n') 
-                temp_line[line_len - 1] = NULL_CHAR;
-            /* Check for line length overflow */
-            if (line_len > MAX_LINE_LEN)
-                if (temp_line[MAX_LINE_LEN] != NULL_CHAR && temp_line[MAX_LINE_LEN] != '\n')
-                {
-                    print_syntax_error(ERROR_CODE_8, file, line_number); /* Report line length error */
-
-                    /* Clear remaining characters in the line */
-                    while ((c = fgetc(input_file)) != '\n' && c != EOF)
-                        ;    
-                    continue; /*don't check this row, move to the next one*/
-                }
-
+            len=strlen(temp_line);
+            if(temp_line[len-1]=='\n')
+            temp_line[len-1]=NULL_CHAR;
             /*make line struct*/
             line = create_line(temp_line, file, line_number);
 
@@ -74,7 +61,6 @@ void process_line(char *file)
                 print_system_error(ERROR_CODE_3);
                 exit(1);
             }
-
             
             first_word = get_word(line->data); /* Extract the first word from the line */
             process_word(line, first_word); /* Process extracted word */
@@ -99,6 +85,7 @@ void process_word(Line *line, char *first_word)
         if (is_valid_label(first_word, line))
         {
             FOUND_ERROR_IN_FIRST_PASS = 1;
+            return;
         }
         first_word[word_len - 1] = NULL_CHAR; /* Remove ':' from label */
     }
@@ -332,7 +319,7 @@ void analyse_operation(Line *line, char *second_word, int is_label, char *first_
         /* Check if the comma between operands is missing or misplaced */
 		if (*ptr != COMMA && !is_comma) 
 		{
-			if(*ptr!=SPACE)
+			if(*ptr==NULL_CHAR)
 			{
 			print_syntax_error(ERROR_CODE_26, line->file_name, line->line_number);
 			FOUND_ERROR_IN_FIRST_PASS = 1;

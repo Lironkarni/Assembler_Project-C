@@ -55,6 +55,15 @@ int is_valid_label(char *label, Line *line)
 		print_syntax_error(ERROR_CODE_9, line->file_name, line->line_number);
 		return 1;
 	}
+	/*check if label name is instruction*/
+	for (int i = 0; i < directive_count; i++)
+    {
+        if ((strcmp(label, directive_words[i]) == 0))
+        {
+            print_syntax_error(ERROR_CODE_44, line->file_name, line->line_number);
+            return 1;
+        }
+    }
 	if(is_register(label))
 	{
 		print_syntax_error(ERROR_CODE_19, line->file_name, line->line_number);

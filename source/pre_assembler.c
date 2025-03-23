@@ -8,6 +8,7 @@
 
 void pre_assembler(const char *filename)
 {
+    int line_len=0, c;
     const char *extension = ".as";
     size_t len = strlen(filename);
 
@@ -42,7 +43,7 @@ void pre_assembler(const char *filename)
         return;
     }
 
-    char line[MAX_LINE_LEN];
+    char line[MAX_LINE_LEN+ 2];
     char macro_name[MAX_LINE_LEN-MCRO_LEN]; /*size of mcro name can be max length of a row- size of mcro*/
     char **macro_content = NULL;
     int inside_macro = 0;
@@ -52,6 +53,18 @@ void pre_assembler(const char *filename)
     // Process the file line by line
     while (fgets(line, sizeof(line), input_file))
     {
+        line_len = strlen(line);  
+        if (line_len > MAX_LINE_LEN)
+                if (line[MAX_LINE_LEN] != NULL_CHAR && line[MAX_LINE_LEN] != '\n')
+                {
+                    print_syntax_error(ERROR_CODE_8, filename, line_count); /* Report line length error */
+
+                    /* Clear remaining characters in the line */
+                    while ((c = fgetc(input_file)) != '\n' && c != EOF)
+                        ;    
+                    continue; /*don't check this row, move to the next one*/
+                }
+
         line_count++;
         remove_extra_spaces(line);  // Clean extra spaces
         line[strcspn(line, "\n")] = NULL_CHAR; // Remove newline character

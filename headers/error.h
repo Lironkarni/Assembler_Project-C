@@ -67,7 +67,8 @@ typedef enum error_codes  {
     ERROR_CODE_40,     /* Label used as an operand but not declared as a label */
     ERROR_CODE_41,     /* Numbers in data instruction must be integers (not decimal) */
     ERROR_CODE_42,      /* Operand of type number (#) must be an integer (not decimal) */
-    ERROR_CODE_43
+    ERROR_CODE_43,     /*UNEXPECTED 'mcroend' FOUND WITHOUT A VALID MACRO OPENING*/
+    ERROR_CODE_44      /*LABEL NAME IS INVALID, CANNOT BE ASSEMBLY OPERATION NAME*/
 } error_codes;
 
 /* Flags indicating if errors were found during program phases */
