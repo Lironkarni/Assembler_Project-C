@@ -382,8 +382,8 @@ void analyse_operation(Line *line, char *second_word, int is_label, char *first_
 
 void test(int dc, int ic)
 {
-    printf("%d\n", dc);
-    printf("%d\n", ic);
+    //printf("%d\n", dc);
+    //printf("%d\n", ic);
     /*print symbol table*/
     Symbol *current = symbol_table_head;
     printf("Symbol Table:\n");

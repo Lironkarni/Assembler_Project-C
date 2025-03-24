@@ -186,9 +186,6 @@ void second_pass(char *file, Symbol *symbol_table_head, code_word *code_image,da
     }
 
     fclose(input_file);
-    printf("test2:\n");
-    test(DC, IC);
-
     // If errors were found during the second pass, stop
     if (FOUND_ERROR_IN_SECOND_PASS != 0)
     {
