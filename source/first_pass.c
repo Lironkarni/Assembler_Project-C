@@ -48,7 +48,6 @@ void process_line(char *file)
     {
         while (fgets(temp_line, sizeof(temp_line), input_file)) /* Read file line by line */
         {
-            printf("%s", temp_line); /* Print the current line (for debugging) */
             line_number++;
             len=strlen(temp_line);
             if(temp_line[len-1]=='\n')

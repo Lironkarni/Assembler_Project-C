@@ -44,7 +44,6 @@ int which_instruction(char *word)
 int which_addressing_method(char *ptr, int op_index, Line *line)
 {
 	long num_ptr;
-
 	if (*ptr == NUMBER_SIGN) // if start with #
 	{
 		ptr++; // Move past '#'
@@ -81,10 +80,6 @@ int which_addressing_method(char *ptr, int op_index, Line *line)
 				return -1;
 			}
 		}
-
-		/* Convert again to validate the numeric range */
-		num_ptr = strtol(ptr, NULL, DECIMAL);
-
 		/* Validate immediate number is within 21-bit range */
 		if (num_ptr < MIN_21BIT || num_ptr > MAX_21BIT)
 		{
